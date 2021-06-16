@@ -25,6 +25,7 @@ func init() {
 
 		pics, err := getPics(num, keyword)
 		if err != nil {
+			logrus.Error(err)
 			ctx.Send(message.Text(err.Error()))
 			return
 		}
