@@ -18,14 +18,14 @@ func init() {
 		var isSingle bool
 		err := parseArgs(&num, &keyword, &isSingle, ctx.State["args"].(string))
 		if err != nil {
-			logrus.Error(err)
+			logrus.Errorln(err)
 			ctx.Send(message.Text(err.Error()))
 			return
 		}
 
 		pics, err := getPics(num, keyword)
 		if err != nil {
-			logrus.Error(err)
+			logrus.Errorln(err)
 			ctx.Send(message.Text(err.Error()))
 			return
 		}
@@ -56,10 +56,8 @@ func getPics(num uint, keyword string) ([]string, error) {
 		return nil, err
 	}
 
-	r := gjson.Get(resp.String(), "data.#.urls.original")
-
 	var pics []string
-	for _, i := range r.Array() {
+	for _, i := range gjson.ParseBytes(resp.Body()).Get("data.#.urls.original").Array() {
 		pics = append(pics, i.String())
 	}
 
