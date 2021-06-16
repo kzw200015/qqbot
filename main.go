@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/kzw200015/qqbot/config"
+	_ "github.com/kzw200015/qqbot/plugin/repeater"
 	_ "github.com/kzw200015/qqbot/plugin/setu"
 	"github.com/sirupsen/logrus"
 	easy "github.com/t-tomalak/logrus-easy-formatter"
